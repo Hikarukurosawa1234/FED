@@ -10,24 +10,24 @@ class Graph
         this.posy2 = this.constant;
 
         //aggregate curve
-        this.shortAposx = this.constant + 60;
-        this.shortAposx2 = width - this.constant - 30;
-        this.shortAposy = this.constant;
-        this.shortAposy2 = height - this.constant - 30;
+        this.shortAposx = this.constant + 120;
+        this.shortAposx2 = width - this.constant - 90;
+        this.shortAposy = this.constant + 60;
+        this.shortAposy2 = height - this.constant - 60;
         //supply curve
-        this.shortSposx = this.constant + 60;
-        this.shortSposx2 = width - this.constant -30 ;
-        this.shortSposy = height- this.constant - 30;
-        this.shortSposy2 = this.constant;
+        this.shortSposx = this.constant + 120;
+        this.shortSposx2 = width - this.constant -90 ;
+        this.shortSposy = height- this.constant - 60;
+        this.shortSposy2 = this.constant + 60;
 
         //LRAS
         this.LRASx = width/2 +15;
         this.LRASy1 = height-this.constant;
         this.LRASy2 = 60;
-
-
-
+        this.counter = 0;
+        this.offset = 0;
     }
+
     show()
     {
         stroke(255);
@@ -82,6 +82,7 @@ class Graph
             {
                 this.shortAposx -= slider.value();
                 this.shortAposx2 -= slider.value();
+                this.offset -= slider.value();
             }
             else if(this.shortAposx2 >= width && slider.value() > 0)
             {
@@ -131,6 +132,35 @@ class Graph
                 this.shortAposx2 -= slider.value();
             }
         }
+        else if(Technology)
+        {
+            // omo selling leads to decrease in money supply, thus decrease in AD 
+            if(this.shortAposx2 < width - this.constant && this.shortAposx > this.constant)
+            {
+                this.LRASx += slider.value();
+                this.shortAposx += slider.value();
+                this.shortAposx2 += slider.value();
+                this.shortSposx += slider.value();
+                this.shortSposx2 += slider.value();
+
+            }
+            else if(this.shortAposx2 >= width - this.constant && slider.value() < 0)
+            {
+                this.LRASx += slider.value();
+                this.shortAposx += slider.value();
+                this.shortAposx2 += slider.value();
+                this.shortSposx += slider.value();
+                this.shortSposx2 += slider.value();
+            }
+            else if(this.shortAposx <= this.constant && slider.value() > 0)
+            {
+                this.LRASx += slider.value();
+                this.shortAposx += slider.value();
+                this.shortAposx2 += slider.value();
+                this.shortSposx += slider.value();
+                this.shortSposx2 += slider.value();
+            }
+        }
         else if(Sell)
         {
             // omo selling leads to decrease in money supply, thus decrease in AD 
@@ -151,4 +181,34 @@ class Graph
             }
         }
     }
+    reset()
+{
+    
+        this.constant = 60;
+        //graphs
+        this.posx = this.constant;
+        this.posy = height - this.constant;
+        this.posx2 = width - this.constant;
+        this.posy2 = this.constant;
+
+        //aggregate curve
+        this.shortAposx = this.constant + 120;
+        this.shortAposx2 = width - this.constant - 90;
+        this.shortAposy = this.constant + 60;
+        this.shortAposy2 = height - this.constant - 60;
+        //supply curve
+        this.shortSposx = this.constant + 120;
+        this.shortSposx2 = width - this.constant -90 ;
+        this.shortSposy = height- this.constant - 60;
+        this.shortSposy2 = this.constant + 60;
+
+        //LRAS
+        this.LRASx = width/2 +15;
+        this.LRASy1 = height-this.constant;
+        this.LRASy2 = 60;
+        this.counter = 0;
+        this.offset = 0;
+
+}
+
 }

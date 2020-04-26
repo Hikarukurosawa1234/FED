@@ -123,5 +123,27 @@ class Money
         }
     }
 }
+    reset()
+    {
+        this.constant = 60;
+        //graphs
+        this.posx = this.constant;
+        this.posy = height - this.constant;
+        this.posx2 = width - this.constant;
+        this.posy2 = this.constant;
+
+        //demand curve
+        this.shortAposx = this.constant+30;
+        this.shortAposx2 = width - 70;
+        this.shortAposy = 60;
+        this.shortAposy2 = height - 70;
+        //moneysupply curve
+        this.moneySposx = width/2;
+        this.moneySposy = height-60;
+        this.moneySposy2 = 60;
+
+
+    }
+
 
 }
